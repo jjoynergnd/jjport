@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 
 const navigation = [
@@ -10,6 +10,7 @@ const navigation = [
 
 export function SiteLayout() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuButton = useRef<HTMLButtonElement>(null)
   const location = useLocation()
 
   useEffect(() => {
@@ -20,6 +21,27 @@ export function SiteLayout() {
     }
   }, [location.pathname, location.hash])
 
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        menuButton.current?.focus()
+      }
+    }
+
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
+
+  const closeMenuAndScroll = (hash: string) => {
+    setMenuOpen(false)
+    if (location.pathname === '/' && location.hash === hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView()
+    }
+  }
+
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main">Skip to content</a>
@@ -27,6 +49,7 @@ export function SiteLayout() {
         <div className="container header-inner">
           <Link className="brand" to="/" onClick={() => setMenuOpen(false)}>Jeremy Joyner</Link>
           <button
+            ref={menuButton}
             className="menu-toggle"
             type="button"
             aria-expanded={menuOpen}
@@ -37,7 +60,7 @@ export function SiteLayout() {
           </button>
           <nav id="primary-navigation" className={`site-nav${menuOpen ? ' is-open' : ''}`} aria-label="Primary navigation">
             {navigation.map((item) => (
-              <Link key={item.href} to={item.href} onClick={() => setMenuOpen(false)}>{item.label}</Link>
+              <Link key={item.href} to={item.href} onClick={() => closeMenuAndScroll(item.href.slice(1))}>{item.label}</Link>
             ))}
           </nav>
         </div>

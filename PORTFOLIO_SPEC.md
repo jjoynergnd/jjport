@@ -28,7 +28,7 @@ Understand → Simplify → Evaluate → Solve → Validate → Scale
 
 | Route | Purpose | Current stage |
 | --- | --- | --- |
-| `/` | Homepage with the approved introductory copy and section scaffolding | Foundation |
+| `/` | Complete responsive homepage with approved copy and six sections | Implemented |
 | `/work/digital-lending` | Digital lending case study | Placeholder |
 | `/work/document-modernization` | Document modernization case study | Placeholder |
 | `/work/operating-model` | Operating model case study | Placeholder |
@@ -52,7 +52,16 @@ The shared layout provides a header, primary navigation, main landmark, footer, 
 - Mobile-first layout with a navigation breakpoint at 48rem.
 - Reusable CSS tokens for color, typography, spacing, border, widths, and breakpoint reference live in `src/styles.css`.
 - Semantic landmarks, visible focus styles, skip link, responsive navigation, and reduced-motion support.
+- Section layout adapts from a single column to a two-column heading/content layout; the approach progression uses one, two, then three columns as space permits.
 - No dark full-page backgrounds, heavy gradients, generic stock photography, oversized decorative cards, or excessive animation.
+
+## Homepage implementation notes
+
+- Selected Work summaries use only the supplied facts. The PPP loan and lending totals describe the broader program, not an individual contribution.
+- The NFL simulator is presented as active R&D. The homepage does not identify unverified areas as completed functionality; the detail page will separate implemented work from plans once confirmed.
+- The screenshot area is reserved for an authentic image.
+- Email, LinkedIn, and résumé destinations are configured in `src/config/site.ts`. All are currently unset. Add only verified destinations, and provide a real PDF in `public/` before enabling the résumé link.
+- The three case-study pages and simulator detail page remain placeholders.
 
 ## Technology decisions
 
@@ -64,7 +73,7 @@ The shared layout provides a header, primary navigation, main landmark, footer, 
 
 ## Future implementation stages
 
-1. Expand homepage sections with approved, specific content and contact details.
+1. Add verified contact destinations and a real résumé PDF when available.
 2. Develop selected work case studies using verified context, decisions, contributions, and outcomes.
-3. Develop the front office simulation project page using verified details.
-4. Refine accessibility, metadata, and responsive presentation as real content is added.
+3. Develop the front office simulation project page using verified feature status and plans.
+4. Add authentic project imagery and refine metadata as real assets become available.

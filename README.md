@@ -1,6 +1,6 @@
 # JJPORT
 
-Jeremy Joyner's professional portfolio foundation.
+Jeremy Joyner's professional portfolio. The homepage is implemented; work and project detail pages remain placeholders.
 
 ## Local development
 
@@ -19,3 +19,5 @@ npm run build
 ```
 
 See [PORTFOLIO_SPEC.md](PORTFOLIO_SPEC.md) for approved copy, architecture, and editorial standards.
+
+Verified email, LinkedIn, and résumé destinations can be set in `src/config/site.ts`. The résumé link should point to a real PDF placed in `public/`.
