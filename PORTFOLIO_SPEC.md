@@ -28,7 +28,11 @@ Understand → Simplify → Evaluate → Solve → Validate → Scale
 
 | Route | Purpose | Current stage |
 | --- | --- | --- |
-| `/` | Complete responsive homepage with approved copy and six sections | Implemented |
+| `/` | Homepage with approved hero and concise previews | Implemented |
+| `/work` | Overview of three enterprise case studies | Implemented |
+| `/approach` | Six-stage problem-solving framework | Implemented |
+| `/about` | Approved About narrative | Implemented |
+| `/contact` | Approved Contact copy and verified links when configured | Implemented |
 | `/work/digital-lending` | PNC PPP digital lending case study | Implemented |
 | `/work/document-modernization` | PNC document-management modernization case study | Implemented |
 | `/work/operating-model` | U.S. Steel PMO / Center of Excellence redesign case study | Implemented |
@@ -37,22 +41,22 @@ Understand → Simplify → Evaluate → Solve → Validate → Scale
 Homepage sections, in order:
 
 1. Hero
-2. Selected Work
-3. My Approach
-4. What I'm Building
-5. About
-6. Contact
+2. Selected Work preview
+3. My Approach preview
+4. What I'm Building preview
+5. About and Contact links
 
-The shared layout provides a header, primary navigation, main landmark, footer, and mobile menu. Unknown paths show a simple 404 page.
+The shared layout provides a header, path-based primary navigation, main landmark, footer, and mobile menu. Primary navigation uses React Router without hash jumps or full page reloads. Route changes, including history navigation, reset scroll to the top. Unknown paths show a simple 404 page.
 
 ## Design standards
 
-- Predominantly white background; charcoal text; restrained teal accent.
+- Predominantly white background; dark charcoal text; restrained teal accent.
 - Modern sans-serif typography, generous whitespace, subtle neutral borders and dividers.
+- Selected sections use a very light cool-gray surface. Work panels have subtle borders and elevation, with clear hover and keyboard focus affordances.
 - Mobile-first layout with a navigation breakpoint at 48rem.
 - Reusable CSS tokens for color, typography, spacing, border, widths, and breakpoint reference live in `src/styles.css`.
 - Semantic landmarks, visible focus styles, skip link, responsive navigation, and reduced-motion support.
-- Section layout adapts from a single column to a two-column heading/content layout; the approach progression uses one, two, then three columns as space permits.
+- Page layouts vary by purpose: compact homepage previews, structured Work panels, a connected Approach progression, and a comfortable About reading column.
 - No dark full-page backgrounds, heavy gradients, generic stock photography, oversized decorative cards, or excessive animation.
 
 ## Homepage implementation notes
@@ -61,7 +65,8 @@ The shared layout provides a header, primary navigation, main landmark, footer, 
 - The NFL simulator is presented as active R&D. Neither page identifies unverified areas as completed functionality; the domain-level status still needs confirmation.
 - The screenshot area is reserved for an authentic image.
 - Email, LinkedIn, and résumé destinations are configured in `src/config/site.ts`. All are currently unset. Add only verified destinations, and provide a real PDF in `public/` before enabling the résumé link.
-- The simulator detail page follows the same typography-first language and links back to What I'm Building.
+- The simulator detail page follows the same typography-first language and links back to Home.
+- Contact links render only when destinations are configured; the unconfigured page displays approved copy without a developer-facing placeholder.
 
 ## Independent product R&D page
 
@@ -75,12 +80,12 @@ The shared layout provides a header, primary navigation, main landmark, footer, 
 - The three narratives live in `src/content/caseStudies.ts` and use one shared `CaseStudyPage` presentation component.
 - Each page covers the challenge, context, Jeremy's role, decisions, delivered work, and a takeaway. Page-specific browser titles and descriptions are set on navigation.
 - PPP lending figures are attributed to the broader PNC operation. The document-management migration is described separately from the unrelated 9,000+ user loan-origination migration.
-- Case-study navigation returns to Selected Work and links to the next story where applicable.
+- Case-study navigation returns to the Work overview and links to the next story where applicable.
 
 ## Technology decisions
 
 - React, TypeScript, and Vite for a lightweight client application.
-- React Router for the five requested routes and a fallback page.
+- React Router for five primary routes, four detail routes, and a fallback page.
 - Plain CSS for tokens and styling; no component library or Tailwind.
 - ESLint for code quality, Vitest and React Testing Library for route verification.
 - Static front end only. No backend, database, API server, authentication, or CMS.

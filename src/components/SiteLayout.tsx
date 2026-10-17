@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 
 const navigation = [
-  { label: 'Work', href: '/#work' },
-  { label: 'Approach', href: '/#approach' },
-  { label: 'About', href: '/#about' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Home', path: '/' },
+  { label: 'Work', path: '/work' },
+  { label: 'Approach', path: '/approach' },
+  { label: 'About', path: '/about' },
+  { label: 'Contact', path: '/contact' },
 ]
 
 export function SiteLayout() {
@@ -13,13 +14,15 @@ export function SiteLayout() {
   const menuButton = useRef<HTMLButtonElement>(null)
   const location = useLocation()
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.key])
+
   useEffect(() => {
-    if (location.hash) {
-      document.getElementById(location.hash.slice(1))?.scrollIntoView()
-    } else {
-      window.scrollTo(0, 0)
-    }
-  }, [location.pathname, location.hash])
+    const previous = window.history.scrollRestoration
+    window.history.scrollRestoration = 'manual'
+    return () => { window.history.scrollRestoration = previous }
+  }, [])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -34,13 +37,6 @@ export function SiteLayout() {
     window.addEventListener('keydown', closeOnEscape)
     return () => window.removeEventListener('keydown', closeOnEscape)
   }, [menuOpen])
-
-  const closeMenuAndScroll = (hash: string) => {
-    setMenuOpen(false)
-    if (location.pathname === '/' && location.hash === hash) {
-      document.getElementById(hash.slice(1))?.scrollIntoView()
-    }
-  }
 
   return (
     <div className="site-shell">
@@ -60,7 +56,7 @@ export function SiteLayout() {
           </button>
           <nav id="primary-navigation" className={`site-nav${menuOpen ? ' is-open' : ''}`} aria-label="Primary navigation">
             {navigation.map((item) => (
-              <Link key={item.href} to={item.href} onClick={() => closeMenuAndScroll(item.href.slice(1))}>{item.label}</Link>
+              <NavLink key={item.path} to={item.path} end={item.path === '/'} onClick={() => setMenuOpen(false)}>{item.label}</NavLink>
             ))}
           </nav>
         </div>

@@ -25,7 +25,7 @@ export function CaseStudyPage({ study, nextStudy }: CaseStudyPageProps) {
   return (
     <article className="case-page container">
       <header className="case-hero">
-        <Link className="case-back" to="/#work"><span aria-hidden="true">←</span> Back to Selected Work</Link>
+        <Link className="case-back" to="/work"><span aria-hidden="true">←</span> Back to Selected Work</Link>
         <p className="eyebrow">Enterprise case study</p>
         <h1>{study.title}</h1>
         <p className="case-summary">{study.summary}</p>
@@ -51,7 +51,7 @@ export function CaseStudyPage({ study, nextStudy }: CaseStudyPageProps) {
       </div>
 
       <nav className="case-navigation" aria-label="Case study navigation">
-        <Link to="/#work"><span aria-hidden="true">←</span> Back to Selected Work</Link>
+        <Link to="/work"><span aria-hidden="true">←</span> Back to Selected Work</Link>
         {nextStudy && <Link to={nextStudy.path}>Next case study: {nextStudy.title} <span aria-hidden="true">↗</span></Link>}
       </nav>
     </article>

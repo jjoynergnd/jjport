@@ -2,6 +2,8 @@
 
 Jeremy Joyner's professional portfolio. The homepage, three enterprise case studies, and independent product R&D page are implemented.
 
+The primary routes are `/`, `/work`, `/approach`, `/about`, and `/contact`. Case studies and the simulator each have their own detail route. Navigation stays within the React application, and route changes return to the top of the page.
+
 ## Local development
 
 ```sh

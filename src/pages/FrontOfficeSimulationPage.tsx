@@ -59,7 +59,7 @@ export function FrontOfficeSimulationPage() {
   return (
     <article className="project-page container">
       <header className="case-hero project-hero">
-        <Link className="case-back" to="/#building"><span aria-hidden="true">←</span> Back to What I'm Building</Link>
+        <Link className="case-back" to="/"><span aria-hidden="true">←</span> Back to Home</Link>
         <p className="eyebrow">Independent Product Research &amp; Development</p>
         <h1>{title}</h1>
         <div className="project-intro">
@@ -125,7 +125,7 @@ export function FrontOfficeSimulationPage() {
       </div>
 
       <nav className="case-navigation" aria-label="Project navigation">
-        <Link to="/#building"><span aria-hidden="true">←</span> Back to What I'm Building</Link>
+        <Link to="/"><span aria-hidden="true">←</span> Back to Home</Link>
       </nav>
     </article>
   )
