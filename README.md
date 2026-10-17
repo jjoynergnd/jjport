@@ -1,6 +1,6 @@
 # JJPORT
 
-Jeremy Joyner's professional portfolio. The homepage and three enterprise case studies are implemented; the simulator detail page remains a placeholder.
+Jeremy Joyner's professional portfolio. The homepage, three enterprise case studies, and independent product R&D page are implemented.
 
 ## Local development
 

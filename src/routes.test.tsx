@@ -8,7 +8,7 @@ const routes = [
   ['/work/digital-lending', 'Making Small-Business Lending Faster, Simpler and More Accessible'],
   ['/work/document-modernization', 'Modernizing Enterprise Document Management'],
   ['/work/operating-model', 'Simplifying How Projects Get Done'],
-  ['/projects/front-office-simulation', 'Front office simulation'],
+  ['/projects/front-office-simulation', 'Building a Football Front-Office Simulator'],
 ] as const
 
 describe('portfolio routes', () => {
@@ -117,6 +117,48 @@ describe('portfolio routes', () => {
 
     fireEvent.click(within(screen.getByRole('navigation', { name: 'Case study navigation' })).getByRole('link', { name: 'Back to Selected Work' }))
     expect(screen.getByRole('heading', { level: 2, name: 'Selected Work' })).toBeInTheDocument()
+    expect(Element.prototype.scrollIntoView).toHaveBeenCalled()
+  })
+
+  it('describes the independent product without claiming completion', () => {
+    render(<MemoryRouter initialEntries={['/projects/front-office-simulation']}><AppRoutes /></MemoryRouter>)
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Building a Football Front-Office Simulator' })).toBeInTheDocument()
+    expect(screen.getByText('Independent Product Research & Development')).toBeInTheDocument()
+    expect(screen.getByText('An ongoing project exploring how to model the decisions, constraints and uncertainty involved in managing a professional football franchise.')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'The problem' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Product approach' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Technologies and tools' })).toBeInTheDocument()
+    expect(screen.getByText(/React, TypeScript, Node.js and database-backed application architecture/)).toBeInTheDocument()
+    expect(document.title).toBe('Building a Football Front-Office Simulator | Jeremy Joyner')
+  })
+
+  it('identifies six product domains as active scope with unverified feature status', () => {
+    render(<MemoryRouter initialEntries={['/projects/front-office-simulation']}><AppRoutes /></MemoryRouter>)
+    const domains = screen.getByRole('region', { name: 'Key areas of development' })
+
+    expect(within(domains).getAllByRole('heading', { level: 3 }).map((heading) => heading.textContent)).toEqual([
+      'Player and roster modeling',
+      'Contracts and franchise management',
+      'Draft evaluation and scouting',
+      'Trade valuation and decision support',
+      'Multi-season simulation architecture',
+      'User experience for complex decisions',
+    ])
+    expect(within(domains).getByText(/Feature-by-feature completion and future enhancements will be identified here when their status is verified/)).toBeInTheDocument()
+    expect(screen.getByText('AI-assisted development helps me implement and iterate. It does not mean the simulation itself is AI-powered.')).toBeInTheDocument()
+    expect(screen.queryByText(/fully implemented|completed product|the simulation is AI-powered/i)).not.toBeInTheDocument()
+  })
+
+  it('links the homepage project to the detail page and back to What I’m Building', () => {
+    render(<MemoryRouter><AppRoutes /></MemoryRouter>)
+
+    fireEvent.click(screen.getByRole('link', { name: 'Explore the project' }))
+    expect(screen.getByRole('heading', { level: 1, name: 'Building a Football Front-Office Simulator' })).toBeInTheDocument()
+    expect(screen.getAllByRole('link', { name: "Back to What I'm Building" })).toHaveLength(2)
+
+    fireEvent.click(within(screen.getByRole('navigation', { name: 'Project navigation' })).getByRole('link', { name: "Back to What I'm Building" }))
+    expect(screen.getByRole('heading', { level: 2, name: "What I'm Building" })).toBeInTheDocument()
     expect(Element.prototype.scrollIntoView).toHaveBeenCalled()
   })
 })

@@ -32,7 +32,7 @@ Understand → Simplify → Evaluate → Solve → Validate → Scale
 | `/work/digital-lending` | PNC PPP digital lending case study | Implemented |
 | `/work/document-modernization` | PNC document-management modernization case study | Implemented |
 | `/work/operating-model` | U.S. Steel PMO / Center of Excellence redesign case study | Implemented |
-| `/projects/front-office-simulation` | Front office simulation project | Placeholder |
+| `/projects/front-office-simulation` | Independent front-office simulation R&D | Implemented |
 
 Homepage sections, in order:
 
@@ -58,10 +58,17 @@ The shared layout provides a header, primary navigation, main landmark, footer, 
 ## Homepage implementation notes
 
 - Selected Work summaries use only the supplied facts. The PPP loan and lending totals describe the broader program, not an individual contribution.
-- The NFL simulator is presented as active R&D. The homepage does not identify unverified areas as completed functionality; the detail page will separate implemented work from plans once confirmed.
+- The NFL simulator is presented as active R&D. Neither page identifies unverified areas as completed functionality; the domain-level status still needs confirmation.
 - The screenshot area is reserved for an authentic image.
 - Email, LinkedIn, and résumé destinations are configured in `src/config/site.ts`. All are currently unset. Add only verified destinations, and provide a real PDF in `public/` before enabling the résumé link.
-- The simulator detail page remains a placeholder.
+- The simulator detail page follows the same typography-first language and links back to What I'm Building.
+
+## Independent product R&D page
+
+- Covers the problem, foundation-first product approach, six product domains, iterative development process, verified technology stack, and the practices the work exercises.
+- The project uses React, TypeScript, Node.js, database-backed application architecture, and Codex and Claude as development aids. No deployment, user, usage, or performance claims are made.
+- Domain-level implemented versus planned status has not been supplied. The page labels these as areas of development rather than finished features; add specific status only after verification.
+- AI-assisted development is distinguished from AI behavior in the simulation. A real application screenshot can replace the reserved image area later.
 
 ## Enterprise case studies
 
@@ -81,5 +88,5 @@ The shared layout provides a header, primary navigation, main landmark, footer, 
 ## Future implementation stages
 
 1. Add verified contact destinations and a real résumé PDF when available.
-2. Develop the front office simulation project page using verified feature status and plans.
-3. Add authentic project imagery and refine metadata as real assets become available.
+2. Verify which simulator domain capabilities are implemented and which are planned, then update the project page.
+3. Add authentic project imagery as real assets become available.
