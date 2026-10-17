@@ -1,5 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { SiteLayout } from './components/SiteLayout'
+import { caseStudies } from './content/caseStudies'
+import { CaseStudyPage } from './pages/CaseStudyPage'
 import { HomePage } from './pages/HomePage'
 import { PlaceholderPage } from './pages/PlaceholderPage'
 
@@ -8,9 +10,9 @@ export function AppRoutes() {
     <Routes>
       <Route element={<SiteLayout />}>
         <Route path="/" element={<HomePage />} />
-        <Route path="/work/digital-lending" element={<PlaceholderPage eyebrow="Selected work" title="Digital lending" />} />
-        <Route path="/work/document-modernization" element={<PlaceholderPage eyebrow="Selected work" title="Document modernization" />} />
-        <Route path="/work/operating-model" element={<PlaceholderPage eyebrow="Selected work" title="Operating model" />} />
+        {caseStudies.map((study, index) => (
+          <Route key={study.path} path={study.path} element={<CaseStudyPage study={study} nextStudy={caseStudies[index + 1]} />} />
+        ))}
         <Route path="/projects/front-office-simulation" element={<PlaceholderPage eyebrow="Project" title="Front office simulation" />} />
         <Route path="*" element={<PlaceholderPage eyebrow="404" title="Page not found" />} />
       </Route>

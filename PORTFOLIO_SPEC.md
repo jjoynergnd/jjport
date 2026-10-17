@@ -29,9 +29,9 @@ Understand → Simplify → Evaluate → Solve → Validate → Scale
 | Route | Purpose | Current stage |
 | --- | --- | --- |
 | `/` | Complete responsive homepage with approved copy and six sections | Implemented |
-| `/work/digital-lending` | Digital lending case study | Placeholder |
-| `/work/document-modernization` | Document modernization case study | Placeholder |
-| `/work/operating-model` | Operating model case study | Placeholder |
+| `/work/digital-lending` | PNC PPP digital lending case study | Implemented |
+| `/work/document-modernization` | PNC document-management modernization case study | Implemented |
+| `/work/operating-model` | U.S. Steel PMO / Center of Excellence redesign case study | Implemented |
 | `/projects/front-office-simulation` | Front office simulation project | Placeholder |
 
 Homepage sections, in order:
@@ -61,7 +61,14 @@ The shared layout provides a header, primary navigation, main landmark, footer, 
 - The NFL simulator is presented as active R&D. The homepage does not identify unverified areas as completed functionality; the detail page will separate implemented work from plans once confirmed.
 - The screenshot area is reserved for an authentic image.
 - Email, LinkedIn, and résumé destinations are configured in `src/config/site.ts`. All are currently unset. Add only verified destinations, and provide a real PDF in `public/` before enabling the résumé link.
-- The three case-study pages and simulator detail page remain placeholders.
+- The simulator detail page remains a placeholder.
+
+## Enterprise case studies
+
+- The three narratives live in `src/content/caseStudies.ts` and use one shared `CaseStudyPage` presentation component.
+- Each page covers the challenge, context, Jeremy's role, decisions, delivered work, and a takeaway. Page-specific browser titles and descriptions are set on navigation.
+- PPP lending figures are attributed to the broader PNC operation. The document-management migration is described separately from the unrelated 9,000+ user loan-origination migration.
+- Case-study navigation returns to Selected Work and links to the next story where applicable.
 
 ## Technology decisions
 
@@ -74,6 +81,5 @@ The shared layout provides a header, primary navigation, main landmark, footer, 
 ## Future implementation stages
 
 1. Add verified contact destinations and a real résumé PDF when available.
-2. Develop selected work case studies using verified context, decisions, contributions, and outcomes.
-3. Develop the front office simulation project page using verified feature status and plans.
-4. Add authentic project imagery and refine metadata as real assets become available.
+2. Develop the front office simulation project page using verified feature status and plans.
+3. Add authentic project imagery and refine metadata as real assets become available.
