@@ -4,7 +4,11 @@ import { usePageMetadata } from '../hooks/usePageMetadata'
 
 export function ContactPage() {
   usePageMetadata('Contact | Jeremy Joyner', 'Connect with Jeremy Joyner about business challenges, technology, and practical improvements.')
-  const hasLinks = Boolean(siteLinks.email || siteLinks.linkedin || siteLinks.resume)
+  const destinations = [
+    { label: 'Email', href: siteLinks.email ? `mailto:${siteLinks.email}` : null },
+    { label: 'LinkedIn', href: siteLinks.linkedin },
+    { label: 'Résumé', href: siteLinks.resume },
+  ]
 
   return (
     <div className="page-shell container contact-page">
@@ -13,15 +17,17 @@ export function ContactPage() {
         <h1>Let's connect.</h1>
         <p>{contactCopy}</p>
       </header>
-      {hasLinks && (
-        <section className="contact-destinations" aria-label="Contact links">
-          <ul className="contact-links">
-            {siteLinks.email && <li><a href={`mailto:${siteLinks.email}`}>Email <span aria-hidden="true">↗</span></a></li>}
-            {siteLinks.linkedin && <li><a href={siteLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>}
-            {siteLinks.resume && <li><a href={siteLinks.resume} target="_blank" rel="noopener noreferrer">Résumé <span aria-hidden="true">↗</span></a></li>}
-          </ul>
-        </section>
-      )}
+      <section className="contact-destinations" aria-label="Contact options">
+        <ul className="contact-links">
+          {destinations.map(({ label, href }) => (
+            <li key={label}>
+              {href
+                ? <a href={href} target={label === 'Email' ? undefined : '_blank'} rel={label === 'Email' ? undefined : 'noopener noreferrer'}>{label} <span aria-hidden="true">↗</span></a>
+                : <div className="contact-link-unavailable"><span>{label}</span><small>Destination needed</small></div>}
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   )
 }

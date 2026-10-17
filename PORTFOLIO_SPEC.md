@@ -50,13 +50,14 @@ The shared layout provides a header, path-based primary navigation, main landmar
 
 ## Design standards
 
-- Predominantly white background; dark charcoal text; restrained teal accent.
-- Modern sans-serif typography, generous whitespace, subtle neutral borders and dividers.
-- Selected sections use a very light cool-gray surface. Work panels have subtle borders and elevation, with clear hover and keyboard focus affordances.
+- Predominantly white background; near-black charcoal body text, readable dark-slate supporting text, muted metadata, and a restrained teal accent.
+- Light cool-gray surfaces (`#F3F6F7`), fine borders, and restrained shadows create section boundaries. Selective charcoal panels highlight the About principle and case-study takeaways.
+- Modern sans-serif typography with a compact, breathable rhythm. Page introductions start roughly 32–52px below the header on desktop; content uses the available container width instead of narrow centered columns.
+- Work panels separate the problem, individual contribution, and context, with a clear detail-page affordance and teal hover/focus outline.
 - Mobile-first layout with a navigation breakpoint at 48rem.
 - Reusable CSS tokens for color, typography, spacing, border, widths, and breakpoint reference live in `src/styles.css`.
 - Semantic landmarks, visible focus styles, skip link, responsive navigation, and reduced-motion support.
-- Page layouts vary by purpose: compact homepage previews, structured Work panels, a connected Approach progression, and a comfortable About reading column.
+- Page layouts vary by purpose: a balanced homepage hero, structured Work panels, connected Approach stages, an editorial About layout, and a wider case-study narrative grid.
 - No dark full-page backgrounds, heavy gradients, generic stock photography, oversized decorative cards, or excessive animation.
 
 ## Homepage implementation notes
@@ -77,7 +78,7 @@ The shared layout provides a header, path-based primary navigation, main landmar
 
 ## Enterprise case studies
 
-- The three narratives live in `src/content/caseStudies.ts` and use one shared `CaseStudyPage` presentation component.
+- The three narratives live in `src/content/caseStudies.ts` and use one shared `CaseStudyPage` presentation component. The redesign adds category and context details, a wide structured narrative, and a restrained takeaway panel while preserving the underlying facts and qualifications.
 - Each page covers the challenge, context, Jeremy's role, decisions, delivered work, and a takeaway. Page-specific browser titles and descriptions are set on navigation.
 - PPP lending figures are attributed to the broader PNC operation. The document-management migration is described separately from the unrelated 9,000+ user loan-origination migration.
 - Case-study navigation returns to the Work overview and links to the next story where applicable.
@@ -95,3 +96,9 @@ The shared layout provides a header, path-based primary navigation, main landmar
 1. Add verified contact destinations and a real résumé PDF when available.
 2. Verify which simulator domain capabilities are implemented and which are planned, then update the project page.
 3. Add authentic project imagery as real assets become available.
+
+## Refinement and launch readiness
+
+- Home, Work, Approach, case-study, About, and Contact spacing uses a compact, readable rhythm while retaining the white editorial layout and wide case-study narrative.
+- Contact supports verified email, LinkedIn, and résumé destinations through `src/config/site.ts`. All three values remain unset; adding verified destinations and a real résumé PDF is a launch blocker.
+- The digital-lending page expands Paycheck Protection Program (PPP) at its first visible use. The homepage preview and Work overview also expand the term at first mention.

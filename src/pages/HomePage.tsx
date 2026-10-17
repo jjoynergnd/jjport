@@ -12,12 +12,16 @@ export function HomePage() {
     <>
       <section className="hero container" aria-labelledby="hero-title">
         <p className="eyebrow">Technology &amp; AI Transformation Leader</p>
-        <h1 id="hero-title">Making complex problems simpler.</h1>
-        <p className="hero-summary">{heroCopy}</p>
-        <div className="hero-actions">
-          <Link className="action-link" to="/work">Explore My Work <span aria-hidden="true">↗</span></Link>
-          <Link className="text-link" to="/approach">My Approach <span aria-hidden="true">↗</span></Link>
-          {siteLinks.resume && <a className="text-link" href={siteLinks.resume} target="_blank" rel="noopener noreferrer">View Résumé <span aria-hidden="true">↗</span></a>}
+        <div className="hero-layout">
+          <h1 id="hero-title">Making complex problems simpler.</h1>
+          <div className="hero-support">
+            <p className="hero-summary">{heroCopy}</p>
+            <div className="hero-actions">
+              <Link className="action-link" to="/work">Explore My Work <span aria-hidden="true">↗</span></Link>
+              <Link className="text-link" to="/approach">My Approach <span aria-hidden="true">↗</span></Link>
+              {siteLinks.resume && <a className="text-link" href={siteLinks.resume} target="_blank" rel="noopener noreferrer">View Résumé <span aria-hidden="true">↗</span></a>}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -33,7 +37,7 @@ export function HomePage() {
           <div className="home-work-grid">
             {selectedWork.map((item) => (
               <Link className="home-work-card" key={item.path} to={item.path} aria-label={`Read ${item.title} case study`}>
-                <span className="item-number">{item.number} / 03</span>
+                <span className="item-number">{item.number} / 03 <span aria-hidden="true">·</span> {item.category}</span>
                 <h3>{item.title}</h3>
                 <p>{item.preview}</p>
                 <span className="card-action">Read case study <span aria-hidden="true">↗</span></span>

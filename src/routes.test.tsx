@@ -104,6 +104,9 @@ describe('portfolio routes and navigation', () => {
     const work = screen.getByRole('region', { name: 'Enterprise case studies' })
 
     expect(within(work).getAllByRole('link')).toHaveLength(3)
+    expect(within(work).getAllByText('The problem')).toHaveLength(3)
+    expect(within(work).getAllByText('My contribution')).toHaveLength(3)
+    expect(within(work).getByText(/Urgent Paycheck Protection Program \(PPP\) demand required a reliable digital path/)).toBeInTheDocument()
     expect(within(work).getByRole('link', { name: 'Read Digital Lending Transformation case study' })).toHaveAttribute('href', '/work/digital-lending')
     expect(within(work).getByText(/The broader program processed 100,000\+ loans and approximately \$9\.3B/)).toBeInTheDocument()
     expect(within(work).getByText(/the CIO made the final decision/)).toBeInTheDocument()
@@ -122,23 +125,34 @@ describe('portfolio routes and navigation', () => {
   it('preserves approved About and Contact copy without invented destinations', () => {
     render(<MemoryRouter initialEntries={['/about']}><AppRoutes /></MemoryRouter>)
     expect(screen.getByText("I've spent much of my career working on complicated business and technology initiatives—modernizing systems, improving processes, building applications, and helping teams navigate change.")).toBeInTheDocument()
+    expect(screen.getByText("What I've enjoyed most isn't necessarily the technology itself. It's understanding how something works, figuring out why it isn't working as well as it could, and finding a practical way to make it better.")).toBeInTheDocument()
+    expect(screen.getByText("My background spans enterprise transformation, program leadership, software development, and process improvement. I've worked with business leaders, technical teams, and the people who ultimately use the solutions we build.")).toBeInTheDocument()
+    expect(screen.getByText("More recently, I've been spending a lot of time exploring how AI and modern development tools can help organizations work differently. I enjoy getting hands-on, experimenting with new approaches, and building things myself—not just managing the work from a distance.")).toBeInTheDocument()
     expect(screen.getByText("I believe good solutions don't need to be unnecessarily complicated. They need to solve the right problem and work for the people using them.")).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Explore my independent product R&D' })).toHaveAttribute('href', '/projects/front-office-simulation')
 
     fireEvent.click(screen.getByRole('link', { name: 'Contact' }))
     expect(screen.getByText("I'm always interested in thoughtful conversations about business challenges, technology, and opportunities to make things work better.")).toBeInTheDocument()
     expect(within(screen.getByRole('main')).queryByRole('link')).not.toBeInTheDocument()
+    const contactOptions = screen.getByRole('region', { name: 'Contact options' })
+    expect(contactOptions).toHaveTextContent('Email')
+    expect(contactOptions).toHaveTextContent('LinkedIn')
+    expect(contactOptions).toHaveTextContent('Résumé')
+    expect(within(contactOptions).getAllByText('Destination needed')).toHaveLength(3)
     expect(screen.queryByText(/Verified contact links will be added here/)).not.toBeInTheDocument()
   })
 
   it.each([
-    ['/work/digital-lending', 'Making Small-Business Lending Faster, Simpler and More Accessible', 'PNC PPP Digital Lending Transformation', /100,000\+ loans and approximately \$9\.3 billion/],
+    ['/work/digital-lending', 'Making Small-Business Lending Faster, Simpler and More Accessible', 'PNC Paycheck Protection Program (PPP) Digital Lending Transformation', /100,000\+ loans and approximately \$9\.3 billion/],
     ['/work/document-modernization', 'Modernizing Enterprise Document Management', 'PNC Enterprise Document Management', /More than 99% of documents were pre-migrated/],
     ['/work/operating-model', 'Simplifying How Projects Get Done', 'U.S. Steel PMO / Center of Excellence Redesign', /tiered governance and delivery requirements/],
   ])('preserves case study content at %s', (path, title, context, detail) => {
     renderAt(path)
     expect(screen.getByRole('heading', { level: 1, name: title })).toBeInTheDocument()
     expect(screen.getByText(context)).toBeInTheDocument()
+    if (path === '/work/digital-lending') expect(screen.getByText(/The federal PPP then created urgent demand/)).toBeInTheDocument()
     expect(screen.getByText(detail)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'What I took forward' })).toBeInTheDocument()
     expect(document.title).toBe(`${title} | Jeremy Joyner`)
     expect(screen.getAllByRole('link', { name: 'Back to Selected Work' })).toHaveLength(2)
     expect(screen.getAllByRole('link', { name: 'Back to Selected Work' })[0]).toHaveAttribute('href', '/work')

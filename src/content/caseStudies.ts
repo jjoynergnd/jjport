@@ -1,5 +1,6 @@
 export type CaseStudy = {
   path: string
+  category: string
   title: string
   context: string
   summary: string
@@ -10,14 +11,15 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     path: '/work/digital-lending',
+    category: 'Digital lending',
     title: 'Making Small-Business Lending Faster, Simpler and More Accessible',
-    context: 'PNC PPP Digital Lending Transformation',
+    context: 'PNC Paycheck Protection Program (PPP) Digital Lending Transformation',
     summary: 'An urgent lending program called for a practical way to serve small businesses at scale. We extended an existing internal platform to connect the work from intake through customer communication.',
     sections: [
       {
         heading: 'The challenge',
         paragraphs: [
-          'An internal small-business lending platform had already been developed. The federal Paycheck Protection Program (PPP) then created urgent demand for high-volume lending.',
+          'An internal small-business lending platform had already been developed. The federal PPP then created urgent demand for high-volume lending.',
           'Government intake, underwriting, due diligence, approvals and customer communication could not scale through manual processes alone. The team needed a reliable digital path that could move quickly without starting over.',
         ],
       },
@@ -45,6 +47,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     path: '/work/document-modernization',
+    category: 'Enterprise systems',
     title: 'Modernizing Enterprise Document Management',
     context: 'PNC Enterprise Document Management',
     summary: 'Replacing a legacy document environment meant making a sound build-versus-buy decision and planning a migration that would keep the final transition manageable.',
@@ -79,6 +82,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     path: '/work/operating-model',
+    category: 'Operating model',
     title: 'Simplifying How Projects Get Done',
     context: 'U.S. Steel PMO / Center of Excellence Redesign',
     summary: 'A delivery framework can bring consistency, but it also has to fit the work. Feedback from an initial rollout led to a simpler, tiered approach to project governance.',
