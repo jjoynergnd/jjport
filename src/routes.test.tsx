@@ -47,8 +47,12 @@ describe('portfolio routes and navigation', () => {
     expect(screen.getByRole('link', { name: 'View all work' })).toHaveAttribute('href', '/work')
     expect(screen.getByRole('link', { name: 'Explore my approach' })).toHaveAttribute('href', '/approach')
     expect(screen.getByRole('link', { name: 'Explore independent projects' })).toHaveAttribute('href', '/projects')
-    expect(screen.getAllByRole('link', { name: 'View demo' })).toHaveLength(1)
-    expect(screen.getByRole('link', { name: 'View demo' })).toHaveAttribute('href', 'https://wabaseball.vercel.app/')
+    const demoLinks = screen.getAllByRole('link', { name: 'View demo' })
+    expect(demoLinks).toHaveLength(2)
+    expect(demoLinks[0]).toHaveAttribute('href', 'https://wabaseball.vercel.app/')
+    expect(demoLinks[1]).toHaveAttribute('href', 'https://construction-website-green-three.vercel.app/')
+    expect(demoLinks[1]).toHaveAttribute('target', '_blank')
+    expect(demoLinks[1]).toHaveAttribute('rel', 'noopener noreferrer')
     for (const [name, path] of [
       ['Digital Lending Transformation', '/work/digital-lending'],
       ['Enterprise Document Management Modernization', '/work/document-modernization'],
@@ -134,7 +138,11 @@ describe('portfolio routes and navigation', () => {
     expect(screen.getByText('Construction Company Website')).toBeInTheDocument()
     expect(screen.getByText('Front Office / GND Simulation')).toBeInTheDocument()
     expect(screen.getByText('Battle of the Books')).toBeInTheDocument()
-    expect(screen.getAllByRole('link', { name: 'View live demonstration' })).toHaveLength(1)
+    const demoLinks = screen.getAllByRole('link', { name: 'View live demonstration' })
+    expect(demoLinks).toHaveLength(2)
+    expect(demoLinks[1]).toHaveAttribute('href', 'https://construction-website-green-three.vercel.app/')
+    expect(demoLinks[1]).toHaveAttribute('target', '_blank')
+    expect(demoLinks[1]).toHaveAttribute('rel', 'noopener noreferrer')
     expect(screen.getByText(/not an active registration website/)).toBeInTheDocument()
   })
 

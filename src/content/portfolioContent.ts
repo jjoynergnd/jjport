@@ -65,6 +65,7 @@ export const independentProjects: IndependentProject[] = [
     title: 'Construction Company Website',
     status: 'Business website demonstration',
     description: 'A customer-facing prototype for a proposed consulting-business offering, with a clean presentation and inquiry/lead-capture concept.',
+    demoUrl: 'https://construction-website-green-three.vercel.app/',
   },
   {
     slug: 'front-office-simulation',
