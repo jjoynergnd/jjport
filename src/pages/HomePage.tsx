@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { siteLinks } from '../config/site'
-import { approach, selectedWork } from '../content/portfolioContent'
+import { approach, independentProjects, selectedWork } from '../content/portfolioContent'
 import { usePageMetadata } from '../hooks/usePageMetadata'
 
 const heroCopy = "I work at the intersection of business, technology and execution—helping organizations understand what's not working, identify practical solutions and turn those ideas into meaningful improvements."
@@ -37,7 +37,7 @@ export function HomePage() {
           <div className="home-work-grid">
             {selectedWork.map((item) => (
               <Link className="home-work-card" key={item.path} to={item.path} aria-label={`Read ${item.title} case study`}>
-                <span className="item-number">{item.number} / 03 <span aria-hidden="true">·</span> {item.category}</span>
+                <span className="item-number">{item.number} / 04 <span aria-hidden="true">·</span> {item.category}</span>
                 <h3>{item.title}</h3>
                 <p>{item.preview}</p>
                 <span className="card-action">Read case study <span aria-hidden="true">↗</span></span>
@@ -64,12 +64,20 @@ export function HomePage() {
       <section className="home-preview home-preview-surface" aria-labelledby="home-building-title">
         <div className="container building-preview-layout">
           <div>
-            <p className="eyebrow">What I'm building</p>
+            <p className="eyebrow">Things I've built</p>
             <h2 id="home-building-title">Learning by making.</h2>
           </div>
           <div className="building-preview-copy">
-            <p>Alongside hands-on automation and AI work, I'm developing a multi-season NFL general-manager simulation as an independent product R&amp;D project. It is a place to work through complex rules, decisions and tradeoffs in software.</p>
-            <Link className="text-link" to="/projects/front-office-simulation">Explore the project <span aria-hidden="true">↗</span></Link>
+            <p>Practical experiments and applications developed through product design, iteration, and AI-assisted development.</p>
+            <ul className="project-preview-list">
+              {independentProjects.slice(0, 2).map((project) => (
+                <li key={project.slug}>
+                  <span><strong>{project.title}</strong><small>{project.status}</small></span>
+                  {project.demoUrl && <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">View demo <span aria-hidden="true">↗</span></a>}
+                </li>
+              ))}
+            </ul>
+            <Link className="text-link" to="/projects">Explore independent projects <span aria-hidden="true">↗</span></Link>
           </div>
         </div>
       </section>

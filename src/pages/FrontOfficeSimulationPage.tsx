@@ -95,10 +95,6 @@ export function FrontOfficeSimulationPage() {
               </li>
             ))}
           </ul>
-          <figure className="project-image">
-            <div className="image-reserve"><span>Authentic application screenshot to be added</span></div>
-            <figcaption>Image space reserved for a verified view of the application.</figcaption>
-          </figure>
         </section>
 
         <section className="case-section" aria-labelledby="project-process-title">

@@ -12,6 +12,8 @@ const routes = [
   ['/work/digital-lending', 'Making Small-Business Lending Faster, Simpler and More Accessible'],
   ['/work/document-modernization', 'Modernizing Enterprise Document Management'],
   ['/work/operating-model', 'Simplifying How Projects Get Done'],
+  ['/work/integraiq', 'IntegraIQ — Connecting Systems, Processes, and People'],
+  ['/projects', "Things I've built."],
   ['/projects/front-office-simulation', 'Building a Football Front-Office Simulator'],
 ] as const
 
@@ -44,11 +46,14 @@ describe('portfolio routes and navigation', () => {
     expect(screen.getByRole('link', { name: 'Explore My Work' })).toHaveAttribute('href', '/work')
     expect(screen.getByRole('link', { name: 'View all work' })).toHaveAttribute('href', '/work')
     expect(screen.getByRole('link', { name: 'Explore my approach' })).toHaveAttribute('href', '/approach')
-    expect(screen.getByRole('link', { name: 'Explore the project' })).toHaveAttribute('href', '/projects/front-office-simulation')
+    expect(screen.getByRole('link', { name: 'Explore independent projects' })).toHaveAttribute('href', '/projects')
+    expect(screen.getAllByRole('link', { name: 'View demo' })).toHaveLength(1)
+    expect(screen.getByRole('link', { name: 'View demo' })).toHaveAttribute('href', 'https://wabaseball.vercel.app/')
     for (const [name, path] of [
       ['Digital Lending Transformation', '/work/digital-lending'],
       ['Enterprise Document Management Modernization', '/work/document-modernization'],
       ['PMO / Center of Excellence Redesign', '/work/operating-model'],
+      ['IntegraIQ — Connecting Systems, Processes, and People', '/work/integraiq'],
     ]) {
       expect(screen.getByRole('link', { name: `Read ${name} case study` })).toHaveAttribute('href', path)
     }
@@ -58,7 +63,7 @@ describe('portfolio routes and navigation', () => {
   it('uses path links and marks the active primary navigation item', () => {
     renderAt('/')
     const nav = screen.getByRole('navigation', { name: 'Primary navigation' })
-    const expected = [['Home', '/'], ['Work', '/work'], ['Approach', '/approach'], ['About', '/about'], ['Contact', '/contact']]
+    const expected = [['Home', '/'], ['Work', '/work'], ['Projects', '/projects'], ['Approach', '/approach'], ['About', '/about'], ['Contact', '/contact']]
     for (const [name, path] of expected) expect(within(nav).getByRole('link', { name })).toHaveAttribute('href', path)
     expect(within(nav).getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page')
 
@@ -99,17 +104,38 @@ describe('portfolio routes and navigation', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'A little about me.' })).toBeInTheDocument()
   })
 
-  it('shows all three work summaries with correct attribution and links', () => {
+  it('shows all four enterprise work summaries with correct attribution and links', () => {
     renderAt('/work')
     const work = screen.getByRole('region', { name: 'Enterprise case studies' })
 
-    expect(within(work).getAllByRole('link')).toHaveLength(3)
-    expect(within(work).getAllByText('The problem')).toHaveLength(3)
-    expect(within(work).getAllByText('My contribution')).toHaveLength(3)
+    expect(within(work).getAllByRole('link')).toHaveLength(4)
+    expect(within(work).getAllByText('The problem')).toHaveLength(4)
+    expect(within(work).getAllByText('My contribution')).toHaveLength(4)
     expect(within(work).getByText(/Urgent Paycheck Protection Program \(PPP\) demand required a reliable digital path/)).toBeInTheDocument()
     expect(within(work).getByRole('link', { name: 'Read Digital Lending Transformation case study' })).toHaveAttribute('href', '/work/digital-lending')
     expect(within(work).getByText(/The broader program processed 100,000\+ loans and approximately \$9\.3B/)).toBeInTheDocument()
     expect(within(work).getByText(/the CIO made the final decision/)).toBeInTheDocument()
+  })
+
+  it('presents IntegraIQ status and confidentiality accurately', () => {
+    renderAt('/work/integraiq')
+    expect(screen.getByText('Conceptual illustration — not actual system architecture.')).toBeInTheDocument()
+    expect(screen.getByText(/Internal application screens and proprietary details are intentionally omitted/)).toBeInTheDocument()
+    expect(screen.getAllByText('In production')).toHaveLength(3)
+    expect(screen.getByText('In development, approximately 80% implemented')).toBeInTheDocument()
+    expect(screen.getByText('In development, approximately 50% implemented')).toBeInTheDocument()
+    expect(screen.getByText(/planned, not completed/)).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /integraiq/i })).not.toBeInTheDocument()
+  })
+
+  it('lists the four independent projects with only supported demo links', () => {
+    renderAt('/projects')
+    expect(screen.getByText('West Allegheny Baseball')).toBeInTheDocument()
+    expect(screen.getByText('Construction Company Website')).toBeInTheDocument()
+    expect(screen.getByText('Front Office / GND Simulation')).toBeInTheDocument()
+    expect(screen.getByText('Battle of the Books')).toBeInTheDocument()
+    expect(screen.getAllByRole('link', { name: 'View live demonstration' })).toHaveLength(1)
+    expect(screen.getByText(/not an active registration website/)).toBeInTheDocument()
   })
 
   it('preserves the exact six-stage framework and guiding principle', () => {
@@ -122,7 +148,7 @@ describe('portfolio routes and navigation', () => {
     ])
   })
 
-  it('preserves approved About and Contact copy without invented destinations', () => {
+  it('preserves About copy and provides email contact with the verified LinkedIn profile', () => {
     render(<MemoryRouter initialEntries={['/about']}><AppRoutes /></MemoryRouter>)
     expect(screen.getByText("I've spent much of my career working on complicated business and technology initiatives—modernizing systems, improving processes, building applications, and helping teams navigate change.")).toBeInTheDocument()
     expect(screen.getByText("What I've enjoyed most isn't necessarily the technology itself. It's understanding how something works, figuring out why it isn't working as well as it could, and finding a practical way to make it better.")).toBeInTheDocument()
@@ -130,18 +156,23 @@ describe('portfolio routes and navigation', () => {
     expect(screen.getByText("More recently, I've been spending a lot of time exploring how AI and modern development tools can help organizations work differently. I enjoy getting hands-on, experimenting with new approaches, and building things myself—not just managing the work from a distance.")).toBeInTheDocument()
     expect(screen.getByText("I believe good solutions don't need to be unnecessarily complicated. They need to solve the right problem and work for the people using them.")).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Explore my independent product R&D' })).toHaveAttribute('href', '/projects/front-office-simulation')
-
     fireEvent.click(screen.getByRole('link', { name: 'Contact' }))
     expect(screen.getByText("I'm always interested in thoughtful conversations about business challenges, technology, and opportunities to make things work better.")).toBeInTheDocument()
-    expect(within(screen.getByRole('main')).queryByRole('link')).not.toBeInTheDocument()
     const contactOptions = screen.getByRole('region', { name: 'Contact options' })
-    expect(contactOptions).toHaveTextContent('Email')
-    expect(contactOptions).toHaveTextContent('LinkedIn')
-    expect(contactOptions).toHaveTextContent('Résumé')
-    expect(within(contactOptions).getAllByText('Destination needed')).toHaveLength(3)
-    expect(screen.queryByText(/Verified contact links will be added here/)).not.toBeInTheDocument()
+    expect(within(contactOptions).getByRole('link', { name: 'jjoynergnd@gmail.com' })).toHaveAttribute('href', 'mailto:jjoynergnd@gmail.com')
+    expect(within(contactOptions).getByRole('button', { name: 'Copy email' })).toBeInTheDocument()
+    expect(within(contactOptions).getByRole('link', { name: 'LinkedIn profile' })).toHaveAttribute('href', 'https://www.linkedin.com/in/jeremyjoyner/')
+    expect(within(contactOptions).queryByText(/Destination needed|phone/i)).not.toBeInTheDocument()
   })
 
+  it('copies the configured contact email and confirms the action', async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined)
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } })
+    renderAt('/contact')
+    fireEvent.click(screen.getByRole('button', { name: 'Copy email' }))
+    expect(await screen.findByRole('status')).toHaveTextContent('Email address copied.')
+    expect(writeText).toHaveBeenCalledWith('jjoynergnd@gmail.com')
+  })
   it.each([
     ['/work/digital-lending', 'Making Small-Business Lending Faster, Simpler and More Accessible', 'PNC Paycheck Protection Program (PPP) Digital Lending Transformation', /100,000\+ loans and approximately \$9\.3 billion/],
     ['/work/document-modernization', 'Modernizing Enterprise Document Management', 'PNC Enterprise Document Management', /More than 99% of documents were pre-migrated/],

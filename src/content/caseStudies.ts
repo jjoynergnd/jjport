@@ -109,4 +109,45 @@ export const caseStudies: CaseStudy[] = [
     ],
     takeaway: 'A useful process should support the work and the people doing it. When the process becomes the obstacle, listen, adjust and keep the controls that truly matter.',
   },
+  {
+    path: '/work/integraiq',
+    category: 'Internal operations platform',
+    title: 'IntegraIQ — Connecting Systems, Processes, and People',
+    context: 'Employer-owned internal operations platform',
+    summary: 'From fragmented applications and business knowledge to a connected internal operations platform.',
+    sections: [
+      {
+        heading: 'The business challenge',
+        paragraphs: [
+          'An organization had accumulated disconnected applications, departmental processes, operating policies, and reporting workflows.',
+          'Limited visibility across systems and departments made it difficult to identify overlapping capabilities, understand how work moved through the organization, and maintain important operational knowledge consistently. IntegraIQ began as a way to address those problems and expanded as additional opportunities became apparent.',
+        ],
+      },
+      {
+        heading: 'My contribution',
+        paragraphs: [
+          'I investigated existing systems and processes, identified opportunities for simplification, evaluated alternatives, designed application functionality and user experiences, and directed iterative implementation using AI-assisted development tools.',
+          'My responsibilities span problem discovery, product direction, workflow design, technical judgment, stakeholder collaboration, and validating implemented functionality. AI-assisted coding supports implementation; I do not claim to have hand-coded the entire platform or to be a specialized production AI engineer.',
+        ],
+      },
+      {
+        heading: 'Capabilities and current status',
+        paragraphs: [
+          'Systems & Process Intelligence — In production. Centralized visibility into business applications, their functions, departmental usage, and documented cross-functional processes such as employee and resident onboarding.',
+          'Acquisitions & Recapitalizations — In production. Internal due-diligence processing workflows and a controlled external-facing portal providing progress visibility to authorized stakeholders.',
+          'Knowledge & Policy Management — In production. Centralized, searchable, digitized operating policies. Users can create, update, share, search, and export policy documents.',
+          'Care-Type Guides — In development. Extending knowledge capabilities to provide structured guidance around care types and associated responsibilities or procedures.',
+          'Deliverables & Compliance — In development, approximately 80% implemented. Designed around preparation, review, certification, and administrative responsibilities for recurring investor deliverables. The full certification workflow is not represented as operational.',
+          'Project & Portfolio Management — In development, approximately 50% implemented. Existing functional capabilities include a purpose-built data grid, calendar, Gantt and board views, portfolio/program/project organization, and an overview experience consolidating project information. The complete platform is not launched.',
+        ],
+      },
+      {
+        heading: 'Evolving the solution',
+        paragraphs: [
+          'A planned product direction is to consolidate acquisitions and recapitalizations functionality into the project management platform. The objective is to reuse common project tracking, workflow, reporting, and ownership capabilities instead of maintaining overlapping functionality in separate modules. This consolidation is planned, not completed.',
+        ],
+      },
+    ],
+    takeaway: 'This case study describes the work at a high level. Internal application screens and proprietary details are intentionally omitted.',
+  },
 ]

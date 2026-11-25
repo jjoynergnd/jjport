@@ -29,6 +29,56 @@ export const selectedWork = [
     summary: 'Established project governance and delivery practices, then simplified an initially overengineered approach into tiered processes suited to project scale and risk.',
     context: 'A lesson in adapting a sound idea until it is practical for the people using it.',
   },
+  {
+    number: '04',
+    category: 'Internal operations platform',
+    title: 'IntegraIQ — Connecting Systems, Processes, and People',
+    path: '/work/integraiq',
+    preview: 'Connecting fragmented applications, departmental processes, and operating knowledge.',
+    problem: 'Disconnected applications, processes, policies, and reporting workflows limited visibility across the organization.',
+    summary: 'Investigated systems and processes, identified simplification opportunities, shaped product direction and user experiences, and directed iterative AI-assisted implementation.',
+    context: 'Employer-owned internal platform. Details are intentionally described at a high level.',
+  },
+] as const
+
+export type IndependentProject = {
+  slug: string
+  title: string
+  status: string
+  description: string
+  note?: string
+  demoUrl?: string
+  path?: string
+}
+
+export const independentProjects: IndependentProject[] = [
+  {
+    slug: 'west-allegheny-baseball',
+    title: 'West Allegheny Baseball',
+    status: 'Live interactive portfolio demonstration',
+    description: 'Designed and directed development of a public-facing website for a proposed community youth baseball organization. I contributed to the product concept, information architecture, visual design, user journeys, functionality, review, and iteration. Codex performed the software coding through an AI-assisted development workflow.',
+    note: 'The original baseball program did not launch. This is a portfolio demonstration, not an active registration website.',
+    demoUrl: 'https://wabaseball.vercel.app/',
+  },
+  {
+    slug: 'construction-company-website',
+    title: 'Construction Company Website',
+    status: 'Business website demonstration',
+    description: 'A customer-facing prototype for a proposed consulting-business offering, with a clean presentation and inquiry/lead-capture concept.',
+  },
+  {
+    slug: 'front-office-simulation',
+    title: 'Front Office / GND Simulation',
+    status: 'In development',
+    description: 'An ongoing project exploring how to model the decisions, constraints and uncertainty involved in managing a professional football franchise.',
+    path: '/projects/front-office-simulation',
+  },
+  {
+    slug: 'battle-of-the-books',
+    title: 'Battle of the Books',
+    status: 'Functional local prototype',
+    description: 'A simple educational game that uses game actions as feedback for correct and incorrect answers to make reading-practice questions more engaging for children.',
+  },
 ] as const
 
 export const approach = [

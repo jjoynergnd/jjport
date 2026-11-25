@@ -36,12 +36,35 @@ export function CaseStudyPage({ study, nextStudy }: CaseStudyPageProps) {
         <div><span className="case-label">Focus</span><p>{study.category}</p></div>
       </div>
 
+      {study.path === '/work/integraiq' && (
+        <figure className="capability-map" aria-labelledby="integraiq-map-caption">
+          <div className="capability-map-center">IntegraIQ</div>
+          <div className="capability-map-items">
+            <div>Systems &amp; Processes</div>
+            <div>Knowledge &amp; Policies</div>
+            <div>Acquisitions &amp; Due Diligence</div>
+            <div>Project &amp; Portfolio Management</div>
+          </div>
+          <figcaption id="integraiq-map-caption">Conceptual illustration — not actual system architecture.</figcaption>
+        </figure>
+      )}
+
       <div className="case-content" aria-label="Case study narrative">
         {study.sections.map((section, index) => (
           <section className="case-section" aria-labelledby={`case-section-${index}`} key={section.heading}>
             <span className="case-step">{String(index + 1).padStart(2, '0')} / {String(study.sections.length).padStart(2, '0')}</span>
             <h2 id={`case-section-${index}`}>{section.heading}</h2>
-            {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {study.path === '/work/integraiq' && section.heading === 'Capabilities and current status' ? (
+              <ul className="integraiq-capabilities">
+                {section.paragraphs.map((paragraph) => {
+                  const [name, rest = ''] = paragraph.split(' — ')
+                  const period = rest.indexOf('.')
+                  const status = period >= 0 ? rest.slice(0, period) : rest
+                  const description = period >= 0 ? rest.slice(period + 1).trim() : ''
+                  return <li key={name}><div><h3>{name}</h3><span>{status}</span></div><p>{description}</p></li>
+                })}
+              </ul>
+            ) : section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </section>
         ))}
       </div>

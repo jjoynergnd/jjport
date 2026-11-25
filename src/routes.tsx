@@ -9,6 +9,7 @@ import { ApproachPage } from './pages/ApproachPage'
 import { AboutPage } from './pages/AboutPage'
 import { ContactPage } from './pages/ContactPage'
 import { PlaceholderPage } from './pages/PlaceholderPage'
+import { ProjectsPage } from './pages/ProjectsPage'
 
 export function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ export function AppRoutes() {
       <Route element={<SiteLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/work" element={<WorkPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/approach" element={<ApproachPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
