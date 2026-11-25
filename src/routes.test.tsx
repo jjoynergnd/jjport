@@ -57,7 +57,7 @@ describe('portfolio routes and navigation', () => {
     ]) {
       expect(screen.getByRole('link', { name: `Read ${name} case study` })).toHaveAttribute('href', path)
     }
-    expect(screen.queryByRole('link', { name: /résumé/i })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /r\u00e9sum\u00e9/i })).toHaveAttribute('href', '/Jeremy_Joyner_General_Professional_Resume.pdf')
   })
 
   it('uses path links and marks the active primary navigation item', () => {
@@ -162,6 +162,7 @@ describe('portfolio routes and navigation', () => {
     expect(within(contactOptions).getByRole('link', { name: 'jjoynergnd@gmail.com' })).toHaveAttribute('href', 'mailto:jjoynergnd@gmail.com')
     expect(within(contactOptions).getByRole('button', { name: 'Copy email' })).toBeInTheDocument()
     expect(within(contactOptions).getByRole('link', { name: 'LinkedIn profile' })).toHaveAttribute('href', 'https://www.linkedin.com/in/jeremyjoyner/')
+    expect(within(contactOptions).getByRole('link', { name: 'Download r\u00e9sum\u00e9' })).toHaveAttribute('href', '/Jeremy_Joyner_General_Professional_Resume.pdf')
     expect(within(contactOptions).queryByText(/Destination needed|phone/i)).not.toBeInTheDocument()
   })
 

@@ -35,6 +35,7 @@ export function ContactPage() {
           <span className="contact-copy-status" role="status" aria-live="polite">{copyMessage}</span>
         </div>}
         {siteLinks.linkedin && <p className="contact-profile"><a className="text-link" href={siteLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn profile <span aria-hidden="true">↗</span></a></p>}
+        {siteLinks.resume && <p className="contact-profile"><a className="text-link" href={siteLinks.resume} download>Download résumé <span aria-hidden="true">↗</span></a></p>}
       </section>
     </div>
   )
